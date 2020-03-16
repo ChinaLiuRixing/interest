@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        #app1 {
+            background: red;
+            top: 100px;
+        }
+
+        #app2 {
+            background: blue;
+            top: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>为什么一次是齐头并进，一次是红慢蓝快</h2>
+    <div id="app1" class="circle"></div>
+    <div id="app2" class="circle"></div>
+
+    <script>
+        const animationCreate = (app, speed, interval, left) => setInterval(() => {
+            left = left + speed;
+            app.style.left = left + 'px';
+        }, interval)
+        window.onload = () => {
+
+            const red = document.getElementById("app1");
+            const blue = document.getElementById("app2");
+            var left1 = 0;
+            var left2 = 0;
+
+
+            // red 慢 blue快
+            // var speed1 = 1;
+            // var speed2 = 2;
+            // animationCreate(red, speed1, speed1, left1); // 每过 1 毫秒向左移动 1 px
+            // animationCreate(blue, speed2, speed2, left2);// 每过 2 毫秒向左移动 2 px
+
+            // 齐头并进
+            var speed1 = 5;
+            var speed2 = 15;
+            animationCreate(red, speed1, 4 * speed1, left1); // 每过 20 毫秒向左移动 5 px
+            animationCreate(blue, speed2, 4 * speed2, left2); // 每过 60 毫秒向左移动 15 px
+
+
+        }
+    </script>
+</body>
+
+</html>
