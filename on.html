@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            document.title = document.hidden ? "你在看我" : "你不看我了";
+            document.onvisibilitychange = () => {
+                document.title = document.hidden ? "你在看我" : "你不看我了";
+            }
+        }
+    </script>
+</body>
+
+</html>
