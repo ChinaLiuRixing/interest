@@ -18,17 +18,39 @@
             top: 100px;
         }
 
+
         #app2 {
             background: blue;
-            top: 300px;
+            top: 250px;
+        }
+
+        #app3 {
+            background: yellow;
+            top: 400px;
+        }
+
+        #app4 {
+            background: purple;
+            top: 550px;
+        }
+
+        #app5 {
+            background: green;
+            top: 700px;
         }
     </style>
 </head>
 
 <body>
-    <h2>为什么一次是齐头并进，一次是红慢蓝快</h2>
+    <button id="btn">重置</button>
+    <h2>紫和绿同样的速度时间比值，但是绿色更快，因为chrome的最小时间间隔4ms</h2>
+    <h2>如果切出别的页面，蓝会停止，但黄不会等你</h2>
+    <h2>蓝黄同样的速度，但是黄会更快一点，因为有排队时间补偿</h2>
     <div id="app1" class="circle"></div>
     <div id="app2" class="circle"></div>
+    <div id="app3" class="circle"></div>
+    <div id="app4" class="circle"></div>
+    <div id="app5" class="circle"></div>
 
     <script>
         const animationCreate = (app, speed, interval, left) => setInterval(() => {
@@ -36,24 +58,42 @@
             app.style.left = left + 'px';
         }, interval)
         window.onload = () => {
+            document.getElementById('btn').addEventListener('click', ()=>location.reload());
 
             const red = document.getElementById("app1");
             const blue = document.getElementById("app2");
+            const yellow = document.getElementById("app3");
+            const purple = document.getElementById("app4");
+            const green = document.getElementById("app5");
             var left1 = 0;
             var left2 = 0;
+            var left4 = 0;
+            var left5 = 0;
 
 
-            // red 慢 blue快
-            // var speed1 = 1;
-            // var speed2 = 2;
-            // animationCreate(red, speed1, speed1, left1); // 每过 1 毫秒向左移动 1 px
-            // animationCreate(blue, speed2, speed2, left2);// 每过 2 毫秒向左移动 2 px
+            // purple 慢 green 快
+            var speed4 = 1;
+            var speed5 = 2;
+            animationCreate(purple, speed4, speed4, left4); // 每过 1 毫秒向左移动 1 px
+            animationCreate(green, speed5, speed5, left5);// 每过 2 毫秒向左移动 2 px
 
             // 齐头并进
             var speed1 = 5;
             var speed2 = 15;
             animationCreate(red, speed1, 4 * speed1, left1); // 每过 20 毫秒向左移动 5 px
             animationCreate(blue, speed2, 4 * speed2, left2); // 每过 60 毫秒向左移动 15 px
+
+
+            // requestAnimationFrame
+            var start = null;
+            const step = (timesamp) => {
+                if (!start) {
+                    start = timesamp;
+                }
+                yellow.style.left = (timesamp - start) / 15 * 4 + 'px';
+                window.requestAnimationFrame(step);
+            }
+            window.requestAnimationFrame(step);
 
 
         }
