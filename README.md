@@ -18,3 +18,6 @@ alert时间或者使页面不在活跃状态会阻断setInterval动画执行，�
 使用react的demo
 ## /src/components/SetState/index.js
 setState是异步还是同步的？
+
+# postmsg
+使用postmsg让两个页面互相传递消息。
