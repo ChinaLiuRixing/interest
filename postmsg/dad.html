@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #frame{
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 255, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <iframe id="frame" src="./son.html" frameborder="10"></iframe>
+    <script>
+        window.onload=function(){
+            const frame = document.getElementById("frame").contentWindow;
+            frame.postMessage('hello son!',"*");
+        }
+        const sleep = async (time)=>new Promise((resolve,reject)=>{
+            setTimeout(resolve,time);
+        })
+        const main = async (func)=>{
+            await sleep(1000);
+            (typeof func==="function")&&func()
+        }
+        window.onmessage=function(e){
+            console.log(e.data);
+            main(()=>{
+                e.source.postMessage("hello son",'*')
+            });
+            
+        }
+    </script>
+</body>
+</html>
