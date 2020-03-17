@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {}
+
+        .zone {
+            width: 200px;
+            height: 20px;
+            background: blueviolet;
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item {
+            width: 200px;
+            height: 20px;
+            text-align: center;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="zone">
+            <div class="item" draggable="true">item</div>
+        </div>
+        <div class="zone"></div>
+        <div class="zone"></div>
+        <div class="zone"></div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var item;
+            document.addEventListener('drag', function (e) {
+                e.preventDefault();
+            }, false)
+
+            document.addEventListener('dragstart', function (e) {
+                item = e.target;
+                e.target.style.opacity = 0.5;
+            }, false)
+            document.addEventListener('dragend', function (e) {
+                e.target.style.opacity = "";
+            }, false)
+
+            document.addEventListener('dragover', function (e) {
+                e.preventDefault();
+            }, false)
+
+            document.addEventListener('dragenter', function (e) {
+                if(e.target.className==="zone"){
+                    e.target.style.background="red";
+                }
+            }, false)
+
+            document.addEventListener('dragleave', function (e) {
+                if(e.target.className==="zone"){
+                    e.target.style.background="";
+                }
+            }, false)
+
+            document.addEventListener('drop', function (e) {
+                if(e.target.className==="zone"){
+                    e.target.style.background="";
+                    item.parentNode.removeChild(item);
+                    e.target.appendChild(item);
+                }
+            }, false)
+        }
+    </script>
+</body>
+
+</html>
