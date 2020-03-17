@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #imgContainer {
+            background: rgba(255, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>鼠标滑轮滚动实现图片缩放</p>
+        <label for="rate">灵敏度 <input type="text" name="rate" id="rate">
+        </label>
+        <div id="imgContainer">
+            <img id="img" src="./dictory.png" alt="">
+        </div>
+    </div>
+    <script>
+
+        window.onload = function () {
+            const img = document.getElementById("img");
+            const imgContainer = document.getElementById("imgContainer");
+            const rateDom = document.getElementById("rate");
+            var rate = 5000;
+            rateDom.addEventListener('change', function (e) {
+                rate = e.target.value;
+            }, false);
+
+            const calc = (value) => 1 + value / (rate || 5000);
+            imgContainer.addEventListener("mousewheel", function (e) {
+                img.style.width = img.offsetWidth * calc(e.deltaY) + 'px'
+                e.preventDefault()
+            }, false);
+        }
+    </script>
+</body>
+
+</html>
