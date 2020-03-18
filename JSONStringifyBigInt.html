@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const map = new Map();
+        map.set();
+        const temp = {
+            a: 1,
+            b: 9999999999999999999999999999999999999n
+        }
+        try {
+            console.log(JSON.stringify(temp));
+        } catch (error) {
+            console.log(error);
+            // 方法一
+            BigInt.prototype.toJSON = function () { return `${this}` };
+            console.log(JSON.stringify(temp));
+        }
+
+
+        // 方法二
+        const mapToObj = (map) => {
+            const obj = Object.create(null);
+            for (const [k, v] of map) {
+                obj[k] = v === undefined ? null : v;
+            }
+            return obj;
+        }
+        const infoToString =(orderInfo)=> {
+            return JSON.stringify({ ...orderInfo }, (k, v) => {
+                if (typeof v === 'bigint') {
+                    return `bigint${v}bigint`;
+                }
+                if (v instanceof Map) {
+                    return this.mapToObj(v);
+                }
+                return v;
+            }).replace(/.bigint(\d+)bigint./g, '$1');
+        }
+
+        console.log(infoToString(temp));
+    </script>
+</body>
+
+</html>
