@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            background: #ccc;
+            width: 1000px;
+            height: 500px;
+            text-align: center;
+            line-height: 500px;
+            font-size: 5rem;
+
+        }
+    </style>
+</head>
+
+<body>
+    <select id="select">
+        <option value="volvo">节流</option>
+        <option value="audi">防抖</option>
+    </select>
+    <div id="box"></div>
+    <script>
+        const debounce = (func, delay) => {
+            console.log('debounce');
+            let timer = null;
+            return function (...rest) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, rest)
+                }, delay);
+            }
+        }
+        function throttle(func, delay) {
+            console.log('throttle');
+            let flag = true;
+            return function (...rest) {
+                if (flag) {
+                    flag = false;
+                    setTimeout(() => {
+                        func.apply(this, rest);
+                        flag = true;
+                    }, delay);
+                }
+            }
+        }
+        const option = [debounce, throttle];
+
+        // 业务
+        var box = document.getElementById("box");
+        var myselect = document.getElementById("select");
+        var index = myselect.selectedIndex;
+
+        const main = () => {
+            box.onmousemove = option[index](function (e) {
+                this.innerHTML = `${e.clientX}-${e.clientY}`
+            }, 50)
+        }
+
+        myselect.addEventListener('change', function () {
+            index = myselect.selectedIndex;
+            main();
+        }, false)
+        main();
+    </script>
+</body>
+
+</html>

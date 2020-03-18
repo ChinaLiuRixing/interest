@@ -10,9 +10,9 @@
 <body>
     <script>
         window.onload = function () {
-            document.title = document.hidden ? "你在看我" : "你不看我了";
+            document.title = document.hidden ?"你不看我了":"你在看我";
             document.onvisibilitychange = () => {
-                document.title = document.hidden ? "你在看我" : "你不看我了";
+                document.title = document.hidden ? "你不看我了":"你在看我";
             }
         }
     </script>
