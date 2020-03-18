@@ -26,7 +26,6 @@
     <div id="box"></div>
     <script>
         const debounce = (func, delay) => {
-            console.log('debounce');
             let timer = null;
             return function (...rest) {
                 clearTimeout(timer);
@@ -36,7 +35,6 @@
             }
         }
         function throttle(func, delay) {
-            console.log('throttle');
             let flag = true;
             return function (...rest) {
                 if (flag) {

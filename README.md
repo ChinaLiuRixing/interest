@@ -27,3 +27,6 @@ setState是异步还是同步的？
 
 # debounceANDthrottle
 节流和防抖
+
+# arguments
+arguments 不是数组 只能输入决定，不能反向决定

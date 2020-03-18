@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // arguments 不是数组 只能输入决定，不能反向决定
+        function add (a1,a2){
+            arguments[1] = 15; // 输入了第二个参数就是重新赋值，没输入第二个参数就是反向决定
+            return a1+a2;
+        }
+        console.log(add(1,2))
+        console.log(add(1))
+    </script>
+</body>
+</html>
